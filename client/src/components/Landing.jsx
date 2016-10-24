@@ -7,7 +7,7 @@ class Landing extends React.Component {
     return (
       <div>
         <h1>Landing Page</h1>
-        <h2><Link to='/'>Landing 이동</Link></h2>
+        <h2><Link to='/'>Landing 이동!</Link></h2>
         <h2><Link to='/login'>LogIn</Link></h2>
         <h2><Link to='/mydress'>MYDress</Link></h2>
       </div>
