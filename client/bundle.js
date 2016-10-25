@@ -74,6 +74,10 @@
 
 	var _MyDress2 = _interopRequireDefault(_MyDress);
 
+	var _Camera = __webpack_require__(737);
+
+	var _Camera2 = _interopRequireDefault(_Camera);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -102,7 +106,8 @@
 	          { path: '/', component: _Layout2.default },
 	          _react2.default.createElement(_reactRouter.IndexRoute, { component: _Landing2.default }),
 	          _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _LogIn2.default }),
-	          _react2.default.createElement(_reactRouter.Route, { path: '/mydress', component: _MyDress2.default })
+	          _react2.default.createElement(_reactRouter.Route, { path: '/mydress', component: _MyDress2.default }),
+	          _react2.default.createElement(_reactRouter.Route, { path: '/camera', component: _Camera2.default })
 	        )
 	      );
 	    }
@@ -27178,9 +27183,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var LoaderExampleInlineCentered = function LoaderExampleInlineCentered() {
-	  return _react2.default.createElement(_semanticUiReact.Loader, { active: true, inline: 'centered' });
-	};
+	var src = 'upload/white-image.png';
 
 	var Landing = function (_React$Component) {
 	  _inherits(Landing, _React$Component);
@@ -27195,14 +27198,14 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
+	        _semanticUiReact.Container,
 	        null,
 	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'Landing Page'
+	          _semanticUiReact.Header,
+	          { as: 'h2', textAlign: 'center' },
+	          'xyz'
 	        ),
-	        _react2.default.createElement(LoaderExampleInlineCentered, null),
+	        _react2.default.createElement(_semanticUiReact.Image, { src: src, size: 'medium', bordered: true, centered: true }),
 	        _react2.default.createElement(
 	          'h2',
 	          null,
@@ -27228,6 +27231,15 @@
 	            _reactRouter.Link,
 	            { to: '/mydress' },
 	            'MYDress'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/camera' },
+	            'Camera'
 	          )
 	        )
 	      );
@@ -34296,15 +34308,15 @@
 	});
 	exports.useVerticalAlignProp = exports.useTextAlignProp = exports.useWidthProp = exports.useKeyOrValueAndKey = exports.useValueAndKey = exports.useKeyOnly = undefined;
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; }; /*
-	                                                                                                                                                                                                                                                   * There are 4 prop patterns used to build up the className for a component.
-	                                                                                                                                                                                                                                                   * Each utility here is meant for use in a classnames() argument.
-	                                                                                                                                                                                                                                                   *
-	                                                                                                                                                                                                                                                   * There is no util for valueOnly() because it would simply return val.
-	                                                                                                                                                                                                                                                   * Use the prop value inline instead.
-	                                                                                                                                                                                                                                                   *   <Label size='big' />
-	                                                                                                                                                                                                                                                   *   <div class="ui big label"></div>
-	                                                                                                                                                                                                                                                   */
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /*
+	                                                                                                                                                                                                                                                                               * There are 4 prop patterns used to build up the className for a component.
+	                                                                                                                                                                                                                                                                               * Each utility here is meant for use in a classnames() argument.
+	                                                                                                                                                                                                                                                                               *
+	                                                                                                                                                                                                                                                                               * There is no util for valueOnly() because it would simply return val.
+	                                                                                                                                                                                                                                                                               * Use the prop value inline instead.
+	                                                                                                                                                                                                                                                                               *   <Label size='big' />
+	                                                                                                                                                                                                                                                                               *   <div class="ui big label"></div>
+	                                                                                                                                                                                                                                                                               */
 
 
 	var _numberToWord = __webpack_require__(405);
@@ -34378,8 +34390,8 @@
 	 * <div class="ui four column grid"></div>
 	 */
 	var useWidthProp = exports.useWidthProp = function useWidthProp(val) {
-	  var widthClass = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
-	  var canEqual = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
+	  var widthClass = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+	  var canEqual = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
 	  if (canEqual && val === 'equal') {
 	    return 'equal width';
@@ -34430,7 +34442,7 @@
 	  value: true
 	});
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 	exports.numberToWord = numberToWord;
 	var numberToWordMap = exports.numberToWordMap = {
@@ -35113,7 +35125,7 @@
 	 * @returns {function|null}
 	 */
 	function createShorthand(Component, mapValueToProps, val) {
-	  var defaultProps = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+	  var defaultProps = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
 
 	  if (typeof Component !== 'function' && typeof Component !== 'string') {
 	    throw new Error('createShorthandFactory() Component must be a string or function.');
@@ -42657,8 +42669,8 @@
 	      args[_key] = arguments[_key];
 	    }
 
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Modal.__proto__ || Object.getPrototypeOf(Modal)).call.apply(_ref, [this].concat(args))), _this), _this.state = {}, _this.handleMount = function () {
-	      debug('handleOpen()');
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Modal.__proto__ || Object.getPrototypeOf(Modal)).call.apply(_ref, [this].concat(args))), _this), _this.state = {}, _this.handlePortalMount = function () {
+	      debug('handlePortalMount()');
 	      var dimmer = _this.props.dimmer;
 
 	      var mountNode = _this.getMountNode();
@@ -42672,8 +42684,10 @@
 	          mountNode.classList.add('blurring');
 	        }
 	      }
-	    }, _this.handleUnmount = function () {
-	      debug('handleUnmount()');
+
+	      _this.setPosition();
+	    }, _this.handlePortalUnmount = function () {
+	      debug('handlePortalUnmount()');
 
 	      var mountNode = _this.getMountNode();
 
@@ -42681,6 +42695,8 @@
 	      // If the dimmer value changes while the modal is open,
 	      //   then removing its current value could leave cruft classes previously added.
 	      mountNode.classList.remove('blurring', 'dimmable', 'dimmed', 'scrollable');
+
+	      cancelAnimationFrame(_this.animationRequestId);
 	    }, _this.getMountNode = function () {
 	      return _this.props.mountNode || document.body;
 	    }, _this.setPosition = function () {
@@ -42710,21 +42726,15 @@
 	        }
 	      }
 
-	      requestAnimationFrame(_this.setPosition);
+	      _this.animationRequestId = requestAnimationFrame(_this.setPosition);
 	    }, _temp), _possibleConstructorReturn(_this, _ret);
 	  }
 
 	  _createClass(Modal, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      debug('componentDidMount()');
-	      this.setPosition();
-	    }
-	  }, {
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
 	      debug('componentWillUnmount()');
-	      this.handleUnmount();
+	      this.handlePortalUnmount();
 	    }
 	  }, {
 	    key: 'render',
@@ -42779,8 +42789,8 @@
 	        }, portalProps, {
 	          className: dimmerClasses,
 	          mountNode: this.getMountNode(),
-	          onMount: this.handleMount,
-	          onUnmount: this.handleUnmount
+	          onMount: this.handlePortalMount,
+	          onUnmount: this.handlePortalUnmount
 	        }),
 	        modalJSX
 	      );
@@ -44373,7 +44383,7 @@
 	        searchQuery: newQuery
 	      });
 	    }, _this.getMenuOptions = function () {
-	      var value = arguments.length <= 0 || arguments[0] === undefined ? _this.state.value : arguments[0];
+	      var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _this.state.value;
 	      var _this$props7 = _this.props;
 	      var multiple = _this$props7.multiple;
 	      var search = _this$props7.search;
@@ -44488,7 +44498,7 @@
 	      _this.setValue(newValue);
 	      _this.handleChange(e, newValue);
 	    }, _this.moveSelectionBy = function (offset) {
-	      var startIndex = arguments.length <= 1 || arguments[1] === undefined ? _this.state.selectedIndex : arguments[1];
+	      var startIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _this.state.selectedIndex;
 
 	      debug('moveSelectionBy()');
 	      debug('offset: ' + offset);
@@ -54619,7 +54629,7 @@
 	        return memo.concat(categoryData.results);
 	      }, []);
 	    }, _this.getSelectedResult = function () {
-	      var index = arguments.length <= 0 || arguments[0] === undefined ? _this.state.selectedIndex : arguments[0];
+	      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _this.state.selectedIndex;
 
 	      var results = _this.getFlattenedResults();
 	      return (0, _get4.default)(results, index);
@@ -54662,7 +54672,7 @@
 	        menu.scrollTop = item.offsetTop + item.clientHeight - menu.clientHeight;
 	      }
 	    }, _this.tryOpen = function () {
-	      var currentValue = arguments.length <= 0 || arguments[0] === undefined ? _this.state.value : arguments[0];
+	      var currentValue = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _this.state.value;
 
 	      debug('open()');
 
@@ -54719,7 +54729,7 @@
 
 	      var result = _objectWithoutProperties(_ref2, ['childKey']);
 
-	      var offset = arguments.length <= 3 || arguments[3] === undefined ? 0 : arguments[3];
+	      var offset = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
 	      var resultRenderer = _this.props.resultRenderer;
 	      var selectedIndex = _this.state.selectedIndex;
 
@@ -58749,6 +58759,8 @@
 
 	var _reactRouter = __webpack_require__(172);
 
+	var _semanticUiReact = __webpack_require__(237);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -58776,6 +58788,65 @@
 	          'h1',
 	          null,
 	          'LogIn Page'
+	        ),
+	        _react2.default.createElement(_semanticUiReact.Button, { circular: true, color: 'facebook', icon: 'facebook' }),
+	        _react2.default.createElement(_semanticUiReact.Button, { circular: true, color: 'linkedin', icon: 'linkedin' }),
+	        _react2.default.createElement(_semanticUiReact.Button, { circular: true, color: 'google plus', icon: 'google plus' }),
+	        _react2.default.createElement(
+	          _semanticUiReact.Segment,
+	          { padded: true },
+	          _react2.default.createElement(
+	            _semanticUiReact.Button,
+	            { primary: true, fluid: true },
+	            'Login'
+	          ),
+	          _react2.default.createElement(
+	            _semanticUiReact.Divider,
+	            { horizontal: true },
+	            'Or'
+	          ),
+	          _react2.default.createElement(
+	            _semanticUiReact.Button,
+	            { secondary: true, fluid: true },
+	            'Sign Up Now'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _semanticUiReact.Modal,
+	          { trigger: _react2.default.createElement(
+	              _semanticUiReact.Button,
+	              null,
+	              'Show Modal'
+	            ) },
+	          _react2.default.createElement(
+	            _semanticUiReact.Modal.Header,
+	            null,
+	            'Select a Photo'
+	          ),
+	          _react2.default.createElement(
+	            _semanticUiReact.Modal.Content,
+	            { image: true },
+	            _react2.default.createElement(_semanticUiReact.Image, { wrapped: true, size: 'medium', src: 'http://semantic-ui.com/images/avatar2/large/rachel.png' }),
+	            _react2.default.createElement(
+	              _semanticUiReact.Modal.Description,
+	              null,
+	              _react2.default.createElement(
+	                _semanticUiReact.Header,
+	                null,
+	                'Default Profile Image'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'We\'ve found the following gravatar image associated with your e-mail address.'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'Is it okay to use this photo?'
+	              )
+	            )
+	          )
 	        ),
 	        _react2.default.createElement(
 	          'h2',
@@ -58890,6 +58961,56 @@
 	}(_react2.default.Component);
 
 	module.exports = MyDress;
+
+/***/ },
+/* 737 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Camera = function (_React$Component) {
+		_inherits(Camera, _React$Component);
+
+		function Camera() {
+			_classCallCheck(this, Camera);
+
+			return _possibleConstructorReturn(this, (Camera.__proto__ || Object.getPrototypeOf(Camera)).apply(this, arguments));
+		}
+
+		_createClass(Camera, [{
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"div",
+					null,
+					_react2.default.createElement(
+						"form",
+						{ action: "server.cgi", method: "post", enctype: "multipart/form-data" },
+						_react2.default.createElement("input", { type: "file", name: "image", accept: "image/*", capture: true }),
+						_react2.default.createElement("input", { type: "submit", value: "Upload" })
+					)
+				);
+			}
+		}]);
+
+		return Camera;
+	}(_react2.default.Component);
+
+	module.exports = Camera;
 
 /***/ }
 /******/ ]);
