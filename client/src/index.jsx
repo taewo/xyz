@@ -5,7 +5,7 @@ import Layout from './components/Layout'
 import Landing from './components/Landing'
 import LogIn from './components/LogIn'
 import MyDress from './components/MyDress'
-import Camera from './components/Camera'
+import PhotoEdit from './components/PhotoEdit'
 
 
 class App extends React.Component {
@@ -21,7 +21,7 @@ class App extends React.Component {
           <IndexRoute component={Landing} />
           <Route path='/login' component={LogIn} />
           <Route path='/mydress' component={MyDress} />
-          <Route path='/camera' component={Camera} />
+          <Route path='/photoedit' component={PhotoEdit} />
         </Route>
       </Router>
     )

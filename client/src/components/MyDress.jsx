@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
+import $ from 'jquery'
 
 class MyDress extends React.Component {
 
@@ -10,6 +11,11 @@ class MyDress extends React.Component {
         <h2><Link to='/'>Landing 이동</Link></h2>
         <h2><Link to='/login'>LogIn</Link></h2>
         <h2><Link to='/mydress'>MYDress</Link></h2>
+        <h2><Link to='/photoedit'>photoedit</Link></h2>
+        <form action="server.cgi" method="post" encType="multipart/form-data">
+          <input type="file" name="image" accept="image/*" id="take-picture" capture="camera"/>
+          <canvas></canvas>
+        </form>
       </div>
     )
   }
