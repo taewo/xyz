@@ -66,11 +66,11 @@
 
 	var _Landing2 = _interopRequireDefault(_Landing);
 
-	var _LogIn = __webpack_require__(237);
+	var _LogIn = __webpack_require__(238);
 
 	var _LogIn2 = _interopRequireDefault(_LogIn);
 
-	var _MyDress = __webpack_require__(241);
+	var _MyDress = __webpack_require__(242);
 
 	var _MyDress2 = _interopRequireDefault(_MyDress);
 
@@ -96,7 +96,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _reactRouter.Router,
-	        { history: _reactRouter.hashHistory },
+	        { history: _reactRouter.browserHistory },
 	        _react2.default.createElement(
 	          _reactRouter.Route,
 	          { path: '/', component: _Layout2.default },
@@ -27168,6 +27168,10 @@
 
 	var _reactRouter = __webpack_require__(172);
 
+	var _jquery = __webpack_require__(237);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27187,6 +27191,52 @@
 
 	  _createClass(Landing, [{
 	    key: 'render',
+
+	    // constructor(props){
+	    //   super(props);
+	    //   this.state= {
+	    //     tokenFB : window.localStorage.getItem('xyzFacebook'),
+	    //     tokenGG : window.localStorage.getItem('xyzGoogle')
+	    //   };
+	    //   this.checkUser = this.checkUser.bind(this);
+	    // }
+
+	    // checkUser(){
+	    //   console.log(this.state.tokenGG);
+	    //   if(this.state.tokenGG){     //  google token
+	    //     console.log('i have google token')
+	    //     var token = this.state.tokenGG;
+	    //     $.ajax({  //  사용자 토큰 인증.
+	    //       type:'GET',
+	    //       url:'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='+ token,
+	    //       success:((data)=> {
+	    //         console.log("googgle token check success"); // goodle token 체크.
+	    //         browserHistory.push('/mydress');
+	    //       }),
+	    //       error: (err) => {
+	    //         console.log('decoding err');  //  token 에러.
+	    //         browserHistory.push('/login');
+	    //       }
+	    //     });
+	    //   } 
+	    //   else if(this.state.tokenFB){
+	    //     console.log('i have facebook token')
+	    //     var token = this.state.tokenFB;
+	    //     $.ajax({
+	    //       type:'GET',
+	    //       url:' https://graph.facebook.com/me?access_token='+ token,
+	    //       success:((data)=>{
+	    //         console.log('facebook token check success');
+	    //         browserHistory.push('/mydress');
+	    //       error:(err) => {
+	    //         console.log('facebook token check fail');
+	    //         browserHistory.push('/login');
+	    //       }
+	    //       })
+	    //     })
+	    //   }
+	    // }
+
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
@@ -27194,7 +27244,7 @@
 	        _react2.default.createElement(
 	          'h1',
 	          null,
-	          'Landing Page'
+	          'Landing Page!!!!!'
 	        ),
 	        _react2.default.createElement(
 	          'h2',
@@ -27234,143 +27284,6 @@
 
 /***/ },
 /* 237 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(172);
-
-	var _reactGoogleLogin = __webpack_require__(238);
-
-	var _reactGoogleLogin2 = _interopRequireDefault(_reactGoogleLogin);
-
-	var _jquery = __webpack_require__(239);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	var _reactFacebookLogin = __webpack_require__(240);
-
-	var _reactFacebookLogin2 = _interopRequireDefault(_reactFacebookLogin);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var LogIn = function (_React$Component) {
-	  _inherits(LogIn, _React$Component);
-
-	  function LogIn(props) {
-	    _classCallCheck(this, LogIn);
-
-	    var _this = _possibleConstructorReturn(this, (LogIn.__proto__ || Object.getPrototypeOf(LogIn)).call(this, props));
-
-	    _this.state = {
-	      loginText: "Login with Google"
-	    };
-	    _this.responseGoogle = _this.responseGoogle.bind(_this);
-	    _this.responseFacebook = _this.responseFacebook.bind(_this);
-	    return _this;
-	  }
-
-	  _createClass(LogIn, [{
-	    key: 'responseGoogle',
-	    value: function responseGoogle(googleUser) {
-	      var id_token = googleUser.getAuthResponse().id_token;
-	      var profile = googleUser.getBasicProfile();
-	      console.log(1, googleUser);
-	      console.log(2, { accessToken: id_token });
-	      console.log(3, profile);
-	      console.log(4, profile.getName());
-	      console.log(5, id_token);
-
-	      //anything else you want to do(save to localStorage)... 
-
-	      // $.ajax({
-	      //   type:'GET',
-	      //   url:'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='+id_token,
-	      //   datatype:'jsonp',
-	      //   success:((data)=> {
-	      //     console.log("googgle token check success");
-	      //     this.setState({loginText:data.name});
-	      //   }).bind(this),
-	      //   error: (err) => {
-	      //     console.log('decoding err');
-	      //   }
-	      // });
-	    }
-	  }, {
-	    key: 'responseFacebook',
-	    value: function responseFacebook(response) {
-	      console.log(1, 'taew', response);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          _reactGoogleLogin2.default,
-	          {
-	            clientId: "681391014277-plrkjn39cj0ilg7pfi88s4fnb12sjlap.apps.googleusercontent.com"
-	            //class="google-login"
-	            // 접근 요청할 수 있는 데이터
-	            //scope="profile"
-	            , onSuccess: this.responseGoogle,
-	            onFailure: this.responseGoogle,
-	            offline: false
-	            //responseHandler={this.responseGoogle}
-	          },
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            this.state.loginText
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _reactFacebookLogin2.default,
-	          {
-	            appId: '1393584200670947',
-	            autoLoad: true,
-	            fields: 'name,email,picture'
-	            // onClick={componentClicked}
-	            , scope: 'email,public_profile,user_friends',
-	            callback: this.responseFacebook
-	          },
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            'click FB'
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return LogIn;
-	}(_react2.default.Component);
-
-	module.exports = LogIn;
-
-/***/ },
-/* 238 */
-/***/ function(module, exports, __webpack_require__) {
-
-	!function(e,t){ true?module.exports=t(__webpack_require__(1)):"function"==typeof define&&define.amd?define(["react"],t):"object"==typeof exports?exports.GoogleLogin=t(require("react")):e.GoogleLogin=t(e.react)}(this,function(e){return function(e){function t(n){if(o[n])return o[n].exports;var i=o[n]={exports:{},id:n,loaded:!1};return e[n].call(i.exports,i,i.exports,t),i.loaded=!0,i.exports}var o={};return t.m=e,t.c=o,t.p="",t(0)}([function(e,t,o){e.exports=o(2)},function(e,t,o){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function r(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function s(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(t,"__esModule",{value:!0});var a=function(){function e(e,t){for(var o=0;o<t.length;o++){var n=t[o];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,o,n){return o&&e(t.prototype,o),n&&e(t,n),t}}(),c=o(3),l=n(c),u=function(e){function t(e){i(this,t);var o=r(this,Object.getPrototypeOf(t).call(this,e));return o.onBtnClick=o.onBtnClick.bind(o),o.state={disabled:"disabled"},o}return s(t,e),a(t,[{key:"componentDidMount",value:function(){var e=this,t=this.props,o=t.clientId,n=t.scope,i=t.cookiePolicy,r=t.loginHint,s=t.hostedDomain;!function(e,t,o,n){var i=e.getElementsByTagName(t)[0],r=i,s=i;s=e.createElement(t),s.id=o,s.src="//apis.google.com/js/client:platform.js",r.parentNode.insertBefore(s,r),s.onload=n}(document,"script","google-login",function(){var t={client_id:o,cookiepolicy:i,login_hint:r,hosted_domain:s,scope:n};window.gapi.load("auth2",function(){e.setState({disabled:""}),window.gapi.auth2.getAuthInstance()||window.gapi.auth2.init(t)})})}},{key:"onBtnClick",value:function(){var e=window.gapi.auth2.getAuthInstance(),t=this.props,o=t.offline,n=t.redirectUri,i=t.onSuccess,r=t.onFailure;if(o){var s={redirect_uri:n};e.grantOfflineAccess(s).then(function(e){i(e)},function(e){r(e)})}else e.signIn().then(function(e){var t=e.getBasicProfile(),o=e.getAuthResponse();e.googleId=t.getId(),e.tokenObj=o,e.tokenId=o.id_token,e.accessToken=o.access_token,e.profileObj={googleId:t.getId(),imageUrl:t.getImageUrl(),email:t.getEmail(),name:t.getName(),givenName:t.getGivenName(),familyName:t.getFamilyName()},i(e)},function(e){r(e)})}},{key:"render",value:function(){var e={display:"inline-block",background:"#d14836",color:"#fff",width:190,paddingTop:10,paddingBottom:10,borderRadius:2,border:"1px solid transparent",fontSize:16,fontWeight:"bold",fontFamily:"Roboto"},t=this.props,o=t.style,n=t.className,i=t.buttonText,r=t.children;return l["default"].createElement("button",{className:n,onClick:this.onBtnClick,style:n?{}:o||e,disabled:this.state.disabled},r?r:i)}}]),t}(c.Component);u.propTypes={onSuccess:c.PropTypes.func.isRequired,onFailure:c.PropTypes.func.isRequired,clientId:c.PropTypes.string.isRequired,buttonText:c.PropTypes.string,offline:c.PropTypes.bool,scope:c.PropTypes.string,className:c.PropTypes.string,redirectUri:c.PropTypes.string,cookiePolicy:c.PropTypes.string,loginHint:c.PropTypes.string,hostedDomain:c.PropTypes.string,children:l["default"].PropTypes.node,style:l["default"].PropTypes.object},u.defaultProps={buttonText:"Login with Google",scope:"profile email",redirectUri:"postmessage",cookiePolicy:"single_host_origin"},t["default"]=u},function(e,t,o){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(t,"__esModule",{value:!0});var i=o(1),r=n(i);t["default"]=r["default"]},function(t,o){t.exports=e}])});
-	//# sourceMappingURL=google-login.js.map
-
-/***/ },
-/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -37596,6 +37509,217 @@
 
 
 /***/ },
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(172);
+
+	var _reactGoogleLogin = __webpack_require__(239);
+
+	var _reactGoogleLogin2 = _interopRequireDefault(_reactGoogleLogin);
+
+	var _reactFacebookLogin = __webpack_require__(240);
+
+	var _reactFacebookLogin2 = _interopRequireDefault(_reactFacebookLogin);
+
+	__webpack_require__(241);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	// import $ from 'jquery';
+
+
+	// import fetch from 'node-fetch';
+
+	/*
+
+	**** Header에 있는 checkUser function 설명.
+
+	  - local에 token이 있는가?
+	    
+	    -true
+	      -fetch콜로 token이 유효한가?
+	        -true
+	          browserHistory.push('/mydress');
+	        -false
+	          browserHistory.push('/login');
+	    
+	    -false
+	      -browserHistory.push('/mydress');
+
+	**** Login에 있는 function 설명.
+
+	  - 구글 or 페북 로그인 버튼 클릭.
+	  - local에 token이 있는가?
+
+	    -true
+	      -token 재갱신.
+	      -browserHistory.push('/mydress');
+	    -false
+	      -새로운 token 저장.
+	      -browserHistory.push('/mydress');
+
+	*/
+
+	var LogIn = function (_React$Component) {
+	  _inherits(LogIn, _React$Component);
+
+	  function LogIn(props) {
+	    _classCallCheck(this, LogIn);
+
+	    var _this = _possibleConstructorReturn(this, (LogIn.__proto__ || Object.getPrototypeOf(LogIn)).call(this, props));
+
+	    _this.state = {
+	      loginTextGoogle: "Login with Google",
+	      loginTextFacebook: 'Login with FaceBook'
+	    };
+	    _this.responseGoogle = _this.responseGoogle.bind(_this);
+	    _this.responseFacebook = _this.responseFacebook.bind(_this);
+	    _this.taewoong = _this.taewoong.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(LogIn, [{
+	    key: 'responseGoogle',
+	    value: function responseGoogle(googleUser) {
+	      //  google 로그인.
+
+	      console.log('google click');
+	      var id_token = googleUser.getAuthResponse().id_token;
+	      var token = window.localStorage.getItem('xyzGoogle');
+	      console.log('id_token', id_token);
+	      // var email = googleUser.getBasicProfile().getEmail();
+
+	      if (token) {
+	        //  토큰이 있는 기존 유저.
+	        console.log('i have token but...');
+	        window.localStorage.removeItem('xyzGoogle');
+	        window.localStorage.setItem('xyzGoogle', id_token);
+	        var new_token = window.localStorage.getItem('xyzGoogle');
+
+	        fetch('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + new_token).then(function (response) {
+	          console.log(1);
+	          if (!response.ok) {
+	            console.log('not valid ID');
+	          } else {
+	            console.log('success token change');
+	            // browserHistory.push('/mydress');
+	          }
+	        });
+	      } else {
+	        //  첫방문 (토큰이 없는) 유저.
+	        console.log('i dont have any token');
+	        window.localStorage.setItem('xyzGoogle', id_token);
+
+	        fetch('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + id_token).then(function (response) {
+	          console.log(2);
+	          if (!response.ok) {
+	            console.log('not valid token');
+	          } else {
+	            console.log('success token');
+	            // browserHistory.push('/mydress');
+	          }
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'responseFacebook',
+	    value: function responseFacebook(response) {
+	      // facebook 로그인.
+
+	      console.log('facebook click');
+	      var accessToken = response.accessToken;
+	      var fbToken = window.localStorage.getItem('xyzFacebook');
+
+	      if (fbToken) {
+	        console.log('i have token but...');
+	        window.localStorage.removeItem('xyzFacebook');
+	        window.localStorage.setItem('xyzFacebook', accessToken);
+	        var new_token = window.localStorage.getItem('xyzFacebook');
+
+	        fetch('https://graph.facebook.com/me?access_token=' + new_token).then(function (response) {
+	          console.log(1);
+	          if (!response.ok) {
+	            console.log('not valid ID');
+	          } else {
+	            console.log('success token change');
+	            // browserHistory.push('/mydress');
+	          }
+	        });
+	      } else {
+	        console.log('i dont have any token');
+	        window.localStorage.setItem('xyzFacebook', accessToken);
+
+	        fetch('https://graph.facebook.com/me?access_token=' + accessToken).then(function (response) {
+	          console.log(2);
+	          if (!response.ok) {
+	            console.log('not valid token');
+	          } else {
+	            console.log('success token');
+	            // browserHistory.push('/mydress')
+	          }
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'taewoong',
+	    value: function taewoong() {
+	      console.log('!@#$%^&%$#@!#$%^&%$#@@!!@#$%^&%$#@!#$%^&%$#@@!!@#$%^&%$#@!#$%^&%$#@@!!@#$%^&%$#@!#$%^&%$#@@!');
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+
+	      this.taewoong();
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_reactGoogleLogin2.default, {
+	          clientId: "681391014277-plrkjn39cj0ilg7pfi88s4fnb12sjlap.apps.googleusercontent.com",
+	          onSuccess: this.responseGoogle,
+	          onFailure: this.responseGoogle,
+	          offline: false
+	        }),
+	        _react2.default.createElement(_reactFacebookLogin2.default, {
+	          appId: '1393584200670947',
+	          autoLoad: false,
+	          fields: 'name,email,picture',
+	          onClick: this.componentClicked,
+	          callback: this.responseFacebook,
+	          scope: 'email,public_profile,user_friends',
+	          icon: 'fa-facebook'
+	        })
+	      );
+	    }
+	  }]);
+
+	  return LogIn;
+	}(_react2.default.Component);
+
+	module.exports = LogIn;
+
+/***/ },
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	!function(e,t){ true?module.exports=t(__webpack_require__(1)):"function"==typeof define&&define.amd?define(["react"],t):"object"==typeof exports?exports.GoogleLogin=t(require("react")):e.GoogleLogin=t(e.react)}(this,function(e){return function(e){function t(n){if(o[n])return o[n].exports;var i=o[n]={exports:{},id:n,loaded:!1};return e[n].call(i.exports,i,i.exports,t),i.loaded=!0,i.exports}var o={};return t.m=e,t.c=o,t.p="",t(0)}([function(e,t,o){e.exports=o(2)},function(e,t,o){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function r(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function s(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(t,"__esModule",{value:!0});var a=function(){function e(e,t){for(var o=0;o<t.length;o++){var n=t[o];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,o,n){return o&&e(t.prototype,o),n&&e(t,n),t}}(),c=o(3),l=n(c),u=function(e){function t(e){i(this,t);var o=r(this,Object.getPrototypeOf(t).call(this,e));return o.onBtnClick=o.onBtnClick.bind(o),o.state={disabled:"disabled"},o}return s(t,e),a(t,[{key:"componentDidMount",value:function(){var e=this,t=this.props,o=t.clientId,n=t.scope,i=t.cookiePolicy,r=t.loginHint,s=t.hostedDomain;!function(e,t,o,n){var i=e.getElementsByTagName(t)[0],r=i,s=i;s=e.createElement(t),s.id=o,s.src="//apis.google.com/js/client:platform.js",r.parentNode.insertBefore(s,r),s.onload=n}(document,"script","google-login",function(){var t={client_id:o,cookiepolicy:i,login_hint:r,hosted_domain:s,scope:n};window.gapi.load("auth2",function(){e.setState({disabled:""}),window.gapi.auth2.getAuthInstance()||window.gapi.auth2.init(t)})})}},{key:"onBtnClick",value:function(){var e=window.gapi.auth2.getAuthInstance(),t=this.props,o=t.offline,n=t.redirectUri,i=t.onSuccess,r=t.onFailure;if(o){var s={redirect_uri:n};e.grantOfflineAccess(s).then(function(e){i(e)},function(e){r(e)})}else e.signIn().then(function(e){var t=e.getBasicProfile(),o=e.getAuthResponse();e.googleId=t.getId(),e.tokenObj=o,e.tokenId=o.id_token,e.accessToken=o.access_token,e.profileObj={googleId:t.getId(),imageUrl:t.getImageUrl(),email:t.getEmail(),name:t.getName(),givenName:t.getGivenName(),familyName:t.getFamilyName()},i(e)},function(e){r(e)})}},{key:"render",value:function(){var e={display:"inline-block",background:"#d14836",color:"#fff",width:190,paddingTop:10,paddingBottom:10,borderRadius:2,border:"1px solid transparent",fontSize:16,fontWeight:"bold",fontFamily:"Roboto"},t=this.props,o=t.style,n=t.className,i=t.buttonText,r=t.children;return l["default"].createElement("button",{className:n,onClick:this.onBtnClick,style:n?{}:o||e,disabled:this.state.disabled},r?r:i)}}]),t}(c.Component);u.propTypes={onSuccess:c.PropTypes.func.isRequired,onFailure:c.PropTypes.func.isRequired,clientId:c.PropTypes.string.isRequired,buttonText:c.PropTypes.string,offline:c.PropTypes.bool,scope:c.PropTypes.string,className:c.PropTypes.string,redirectUri:c.PropTypes.string,cookiePolicy:c.PropTypes.string,loginHint:c.PropTypes.string,hostedDomain:c.PropTypes.string,children:l["default"].PropTypes.node,style:l["default"].PropTypes.object},u.defaultProps={buttonText:"Login with Google",scope:"profile email",redirectUri:"postmessage",cookiePolicy:"single_host_origin"},t["default"]=u},function(e,t,o){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(t,"__esModule",{value:!0});var i=o(1),r=n(i);t["default"]=r["default"]},function(t,o){t.exports=e}])});
+	//# sourceMappingURL=google-login.js.map
+
+/***/ },
 /* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -37603,6 +37727,445 @@
 
 /***/ },
 /* 241 */
+/***/ function(module, exports) {
+
+	(function(self) {
+	  'use strict';
+
+	  if (self.fetch) {
+	    return
+	  }
+
+	  var support = {
+	    searchParams: 'URLSearchParams' in self,
+	    iterable: 'Symbol' in self && 'iterator' in Symbol,
+	    blob: 'FileReader' in self && 'Blob' in self && (function() {
+	      try {
+	        new Blob()
+	        return true
+	      } catch(e) {
+	        return false
+	      }
+	    })(),
+	    formData: 'FormData' in self,
+	    arrayBuffer: 'ArrayBuffer' in self
+	  }
+
+	  function normalizeName(name) {
+	    if (typeof name !== 'string') {
+	      name = String(name)
+	    }
+	    if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
+	      throw new TypeError('Invalid character in header field name')
+	    }
+	    return name.toLowerCase()
+	  }
+
+	  function normalizeValue(value) {
+	    if (typeof value !== 'string') {
+	      value = String(value)
+	    }
+	    return value
+	  }
+
+	  // Build a destructive iterator for the value list
+	  function iteratorFor(items) {
+	    var iterator = {
+	      next: function() {
+	        var value = items.shift()
+	        return {done: value === undefined, value: value}
+	      }
+	    }
+
+	    if (support.iterable) {
+	      iterator[Symbol.iterator] = function() {
+	        return iterator
+	      }
+	    }
+
+	    return iterator
+	  }
+
+	  function Headers(headers) {
+	    this.map = {}
+
+	    if (headers instanceof Headers) {
+	      headers.forEach(function(value, name) {
+	        this.append(name, value)
+	      }, this)
+
+	    } else if (headers) {
+	      Object.getOwnPropertyNames(headers).forEach(function(name) {
+	        this.append(name, headers[name])
+	      }, this)
+	    }
+	  }
+
+	  Headers.prototype.append = function(name, value) {
+	    name = normalizeName(name)
+	    value = normalizeValue(value)
+	    var list = this.map[name]
+	    if (!list) {
+	      list = []
+	      this.map[name] = list
+	    }
+	    list.push(value)
+	  }
+
+	  Headers.prototype['delete'] = function(name) {
+	    delete this.map[normalizeName(name)]
+	  }
+
+	  Headers.prototype.get = function(name) {
+	    var values = this.map[normalizeName(name)]
+	    return values ? values[0] : null
+	  }
+
+	  Headers.prototype.getAll = function(name) {
+	    return this.map[normalizeName(name)] || []
+	  }
+
+	  Headers.prototype.has = function(name) {
+	    return this.map.hasOwnProperty(normalizeName(name))
+	  }
+
+	  Headers.prototype.set = function(name, value) {
+	    this.map[normalizeName(name)] = [normalizeValue(value)]
+	  }
+
+	  Headers.prototype.forEach = function(callback, thisArg) {
+	    Object.getOwnPropertyNames(this.map).forEach(function(name) {
+	      this.map[name].forEach(function(value) {
+	        callback.call(thisArg, value, name, this)
+	      }, this)
+	    }, this)
+	  }
+
+	  Headers.prototype.keys = function() {
+	    var items = []
+	    this.forEach(function(value, name) { items.push(name) })
+	    return iteratorFor(items)
+	  }
+
+	  Headers.prototype.values = function() {
+	    var items = []
+	    this.forEach(function(value) { items.push(value) })
+	    return iteratorFor(items)
+	  }
+
+	  Headers.prototype.entries = function() {
+	    var items = []
+	    this.forEach(function(value, name) { items.push([name, value]) })
+	    return iteratorFor(items)
+	  }
+
+	  if (support.iterable) {
+	    Headers.prototype[Symbol.iterator] = Headers.prototype.entries
+	  }
+
+	  function consumed(body) {
+	    if (body.bodyUsed) {
+	      return Promise.reject(new TypeError('Already read'))
+	    }
+	    body.bodyUsed = true
+	  }
+
+	  function fileReaderReady(reader) {
+	    return new Promise(function(resolve, reject) {
+	      reader.onload = function() {
+	        resolve(reader.result)
+	      }
+	      reader.onerror = function() {
+	        reject(reader.error)
+	      }
+	    })
+	  }
+
+	  function readBlobAsArrayBuffer(blob) {
+	    var reader = new FileReader()
+	    reader.readAsArrayBuffer(blob)
+	    return fileReaderReady(reader)
+	  }
+
+	  function readBlobAsText(blob) {
+	    var reader = new FileReader()
+	    reader.readAsText(blob)
+	    return fileReaderReady(reader)
+	  }
+
+	  function Body() {
+	    this.bodyUsed = false
+
+	    this._initBody = function(body) {
+	      this._bodyInit = body
+	      if (typeof body === 'string') {
+	        this._bodyText = body
+	      } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
+	        this._bodyBlob = body
+	      } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+	        this._bodyFormData = body
+	      } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+	        this._bodyText = body.toString()
+	      } else if (!body) {
+	        this._bodyText = ''
+	      } else if (support.arrayBuffer && ArrayBuffer.prototype.isPrototypeOf(body)) {
+	        // Only support ArrayBuffers for POST method.
+	        // Receiving ArrayBuffers happens via Blobs, instead.
+	      } else {
+	        throw new Error('unsupported BodyInit type')
+	      }
+
+	      if (!this.headers.get('content-type')) {
+	        if (typeof body === 'string') {
+	          this.headers.set('content-type', 'text/plain;charset=UTF-8')
+	        } else if (this._bodyBlob && this._bodyBlob.type) {
+	          this.headers.set('content-type', this._bodyBlob.type)
+	        } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+	          this.headers.set('content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
+	        }
+	      }
+	    }
+
+	    if (support.blob) {
+	      this.blob = function() {
+	        var rejected = consumed(this)
+	        if (rejected) {
+	          return rejected
+	        }
+
+	        if (this._bodyBlob) {
+	          return Promise.resolve(this._bodyBlob)
+	        } else if (this._bodyFormData) {
+	          throw new Error('could not read FormData body as blob')
+	        } else {
+	          return Promise.resolve(new Blob([this._bodyText]))
+	        }
+	      }
+
+	      this.arrayBuffer = function() {
+	        return this.blob().then(readBlobAsArrayBuffer)
+	      }
+
+	      this.text = function() {
+	        var rejected = consumed(this)
+	        if (rejected) {
+	          return rejected
+	        }
+
+	        if (this._bodyBlob) {
+	          return readBlobAsText(this._bodyBlob)
+	        } else if (this._bodyFormData) {
+	          throw new Error('could not read FormData body as text')
+	        } else {
+	          return Promise.resolve(this._bodyText)
+	        }
+	      }
+	    } else {
+	      this.text = function() {
+	        var rejected = consumed(this)
+	        return rejected ? rejected : Promise.resolve(this._bodyText)
+	      }
+	    }
+
+	    if (support.formData) {
+	      this.formData = function() {
+	        return this.text().then(decode)
+	      }
+	    }
+
+	    this.json = function() {
+	      return this.text().then(JSON.parse)
+	    }
+
+	    return this
+	  }
+
+	  // HTTP methods whose capitalization should be normalized
+	  var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT']
+
+	  function normalizeMethod(method) {
+	    var upcased = method.toUpperCase()
+	    return (methods.indexOf(upcased) > -1) ? upcased : method
+	  }
+
+	  function Request(input, options) {
+	    options = options || {}
+	    var body = options.body
+	    if (Request.prototype.isPrototypeOf(input)) {
+	      if (input.bodyUsed) {
+	        throw new TypeError('Already read')
+	      }
+	      this.url = input.url
+	      this.credentials = input.credentials
+	      if (!options.headers) {
+	        this.headers = new Headers(input.headers)
+	      }
+	      this.method = input.method
+	      this.mode = input.mode
+	      if (!body) {
+	        body = input._bodyInit
+	        input.bodyUsed = true
+	      }
+	    } else {
+	      this.url = input
+	    }
+
+	    this.credentials = options.credentials || this.credentials || 'omit'
+	    if (options.headers || !this.headers) {
+	      this.headers = new Headers(options.headers)
+	    }
+	    this.method = normalizeMethod(options.method || this.method || 'GET')
+	    this.mode = options.mode || this.mode || null
+	    this.referrer = null
+
+	    if ((this.method === 'GET' || this.method === 'HEAD') && body) {
+	      throw new TypeError('Body not allowed for GET or HEAD requests')
+	    }
+	    this._initBody(body)
+	  }
+
+	  Request.prototype.clone = function() {
+	    return new Request(this)
+	  }
+
+	  function decode(body) {
+	    var form = new FormData()
+	    body.trim().split('&').forEach(function(bytes) {
+	      if (bytes) {
+	        var split = bytes.split('=')
+	        var name = split.shift().replace(/\+/g, ' ')
+	        var value = split.join('=').replace(/\+/g, ' ')
+	        form.append(decodeURIComponent(name), decodeURIComponent(value))
+	      }
+	    })
+	    return form
+	  }
+
+	  function headers(xhr) {
+	    var head = new Headers()
+	    var pairs = (xhr.getAllResponseHeaders() || '').trim().split('\n')
+	    pairs.forEach(function(header) {
+	      var split = header.trim().split(':')
+	      var key = split.shift().trim()
+	      var value = split.join(':').trim()
+	      head.append(key, value)
+	    })
+	    return head
+	  }
+
+	  Body.call(Request.prototype)
+
+	  function Response(bodyInit, options) {
+	    if (!options) {
+	      options = {}
+	    }
+
+	    this.type = 'default'
+	    this.status = options.status
+	    this.ok = this.status >= 200 && this.status < 300
+	    this.statusText = options.statusText
+	    this.headers = options.headers instanceof Headers ? options.headers : new Headers(options.headers)
+	    this.url = options.url || ''
+	    this._initBody(bodyInit)
+	  }
+
+	  Body.call(Response.prototype)
+
+	  Response.prototype.clone = function() {
+	    return new Response(this._bodyInit, {
+	      status: this.status,
+	      statusText: this.statusText,
+	      headers: new Headers(this.headers),
+	      url: this.url
+	    })
+	  }
+
+	  Response.error = function() {
+	    var response = new Response(null, {status: 0, statusText: ''})
+	    response.type = 'error'
+	    return response
+	  }
+
+	  var redirectStatuses = [301, 302, 303, 307, 308]
+
+	  Response.redirect = function(url, status) {
+	    if (redirectStatuses.indexOf(status) === -1) {
+	      throw new RangeError('Invalid status code')
+	    }
+
+	    return new Response(null, {status: status, headers: {location: url}})
+	  }
+
+	  self.Headers = Headers
+	  self.Request = Request
+	  self.Response = Response
+
+	  self.fetch = function(input, init) {
+	    return new Promise(function(resolve, reject) {
+	      var request
+	      if (Request.prototype.isPrototypeOf(input) && !init) {
+	        request = input
+	      } else {
+	        request = new Request(input, init)
+	      }
+
+	      var xhr = new XMLHttpRequest()
+
+	      function responseURL() {
+	        if ('responseURL' in xhr) {
+	          return xhr.responseURL
+	        }
+
+	        // Avoid security warnings on getResponseHeader when not allowed by CORS
+	        if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
+	          return xhr.getResponseHeader('X-Request-URL')
+	        }
+
+	        return
+	      }
+
+	      xhr.onload = function() {
+	        var options = {
+	          status: xhr.status,
+	          statusText: xhr.statusText,
+	          headers: headers(xhr),
+	          url: responseURL()
+	        }
+	        var body = 'response' in xhr ? xhr.response : xhr.responseText
+	        resolve(new Response(body, options))
+	      }
+
+	      xhr.onerror = function() {
+	        reject(new TypeError('Network request failed'))
+	      }
+
+	      xhr.ontimeout = function() {
+	        reject(new TypeError('Network request failed'))
+	      }
+
+	      xhr.open(request.method, request.url, true)
+
+	      if (request.credentials === 'include') {
+	        xhr.withCredentials = true
+	      }
+
+	      if ('responseType' in xhr && support.blob) {
+	        xhr.responseType = 'blob'
+	      }
+
+	      request.headers.forEach(function(value, name) {
+	        xhr.setRequestHeader(name, value)
+	      })
+
+	      xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit)
+	    })
+	  }
+	  self.fetch.polyfill = true
+	})(typeof self !== 'undefined' ? self : this);
+
+
+/***/ },
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37669,6 +38232,16 @@
 	            { to: '/mydress' },
 	            'MYDress'
 	          )
+	        ),
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          window.localStorage.getItem('xyzGoogle')
+	        ),
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          window.localStorage.getItem('xyzFacebook')
 	        )
 	      );
 	    }

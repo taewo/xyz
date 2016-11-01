@@ -1,9 +1,12 @@
 import express from 'express';
+import routes from './routes/posts';
+
 const app = express();
 let port = 3030;
 
-app.use('/', express.static(__dirname + './../client'));
 
+app.use('/', express.static(__dirname + './../client'));
+app.use('/', routes);
 // app.get('/', function(req, res){
 //   res.render('./../client/index.html');
 // });
