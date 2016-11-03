@@ -37530,6 +37530,10 @@
 
 	var _reactFacebookLogin2 = _interopRequireDefault(_reactFacebookLogin);
 
+	var _jquery = __webpack_require__(237);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
 	__webpack_require__(241);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -37539,14 +37543,10 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	// import $ from 'jquery';
-
-
-	// import fetch from 'node-fetch';
 
 	/*
 
-	**** Header에 있는 checkUser function 설명.
+	**** Header.jsx에 있는 checkUser function 설명.
 
 	  - local에 token이 있는가?
 	    
@@ -37563,14 +37563,14 @@
 	**** Login에 있는 function 설명.
 
 	  - 구글 or 페북 로그인 버튼 클릭.
-	  - local에 token이 있는가?
+	    - local에 token이 있는가?
 
-	    -true
-	      -token 재갱신.
-	      -browserHistory.push('/mydress');
-	    -false
-	      -새로운 token 저장.
-	      -browserHistory.push('/mydress');
+	      -true
+	        -token 재갱신.
+	          -browserHistory.push('/mydress');
+	      -false
+	        -새로운 token 저장.
+	          -browserHistory.push('/mydress');
 
 	*/
 
@@ -37599,9 +37599,19 @@
 
 	      console.log('google click');
 	      var id_token = googleUser.getAuthResponse().id_token;
-	      var token = window.localStorage.getItem('xyzGoogle');
 	      console.log('id_token', id_token);
-	      // var email = googleUser.getBasicProfile().getEmail();
+	      var token = window.localStorage.getItem('xyzGoogle');
+
+	      var profile = googleUser.getBasicProfile();
+	      console.log('profile', profile);
+	      var email = googleUser.getBasicProfile().getEmail();
+	      console.log('email', email);
+	      var name = googleUser.getBasicProfile().getName();
+	      console.log('name', name);
+	      var date = new Date();
+
+	      // var id = googleUser.getBasicProfile().getEmail();
+	      // console.log('id',id);
 
 	      if (token) {
 	        //  토큰이 있는 기존 유저.
@@ -37616,6 +37626,32 @@
 	            console.log('not valid ID');
 	          } else {
 	            console.log('success token change');
+
+	            // user의 정보를 fetch로 server에 보낸다.
+	            var obj = {};
+	            obj['new_token'] = new_token;
+	            obj['old_token'] = token;
+
+	            console.log('obj', obj);
+	            var data = JSON.stringify(obj);
+
+	            fetch('/googlenewtoken', {
+	              method: 'POST',
+	              body: data,
+	              headers: {
+	                'Accept': 'application/json',
+	                'Content-Type': 'application/json'
+	              }
+	            }).then(function (response) {
+	              console.log(1);
+	              if (!response.ok) {
+	                console.log('fail');
+	              } else {
+	                console.log('success');
+	                console.log(1, response);
+	              }
+	            });
+
 	            // browserHistory.push('/mydress');
 	          }
 	        });
@@ -37630,6 +37666,35 @@
 	            console.log('not valid token');
 	          } else {
 	            console.log('success token');
+
+	            // user의 정보를 fetch로 server에 보낸다.
+	            var obj = {};
+	            obj['name'] = name;
+	            obj['email'] = email;
+	            obj['social'] = 'g';
+	            obj['token'] = id_token;
+	            obj['date'] = date;
+
+	            console.log('obj', obj);
+	            var data = JSON.stringify(obj);
+
+	            fetch('/googlenotoken', {
+	              method: 'POST',
+	              body: data,
+	              headers: {
+	                'Accept': 'application/json',
+	                'Content-Type': 'application/json'
+	              }
+	            }).then(function (response) {
+	              console.log(1);
+	              if (!response.ok) {
+	                console.log('fail');
+	              } else {
+	                console.log('success');
+	                console.log(1, response);
+	              }
+	            });
+
 	            // browserHistory.push('/mydress');
 	          }
 	        });
@@ -37641,10 +37706,17 @@
 	      // facebook 로그인.
 
 	      console.log('facebook click');
+	      var name = response.name;
+	      var email = response.email;
 	      var accessToken = response.accessToken;
+	      var date = new Date();
+	      console.log('response', response);
+	      console.log('response.name', name);
+
 	      var fbToken = window.localStorage.getItem('xyzFacebook');
 
 	      if (fbToken) {
+	        //  token이 있는 기존유저.
 	        console.log('i have token but...');
 	        window.localStorage.removeItem('xyzFacebook');
 	        window.localStorage.setItem('xyzFacebook', accessToken);
@@ -37656,10 +37728,35 @@
 	            console.log('not valid ID');
 	          } else {
 	            console.log('success token change');
+
+	            var obj = {};
+	            obj['old_token'] = accessToken;
+	            obj['new_token'] = new_token;
+
+	            var data = JSON.stringify(obj);
+
+	            fetch('/fbnewtoken', {
+	              method: 'POST',
+	              body: data,
+	              headers: {
+	                'Accept': 'application/json',
+	                'Content-Type': 'application/json'
+	              }
+	            }).then(function (response) {
+	              console.log(1);
+	              if (!response.ok) {
+	                console.log('fail');
+	              } else {
+	                console.log('success');
+	                console.log(1, response);
+	              }
+	            });
+
 	            // browserHistory.push('/mydress');
 	          }
 	        });
 	      } else {
+	        //  첫 방문 (token이 없는) 유저.
 	        console.log('i dont have any token');
 	        window.localStorage.setItem('xyzFacebook', accessToken);
 
@@ -37669,6 +37766,32 @@
 	            console.log('not valid token');
 	          } else {
 	            console.log('success token');
+
+	            var obj = {};
+	            obj['name'] = name;
+	            obj['email'] = email;
+	            obj['social'] = 'f';
+	            obj['token'] = accessToken;
+	            obj['date'] = date;
+
+	            var data = JSON.stringify(obj);
+
+	            fetch('/fbnotoken', {
+	              method: 'POST',
+	              body: data,
+	              headers: {
+	                'Accept': 'application/json',
+	                'Content-Type': 'application/json'
+	              }
+	            }).then(function (response) {
+	              console.log(1);
+	              if (!response.ok) {
+	                console.log('fail');
+	              } else {
+	                console.log('success');
+	                console.log(1, response);
+	              }
+	            });
 	            // browserHistory.push('/mydress')
 	          }
 	        });
@@ -37678,6 +37801,40 @@
 	    key: 'taewoong',
 	    value: function taewoong() {
 	      console.log('!@#$%^&%$#@!#$%^&%$#@@!!@#$%^&%$#@!#$%^&%$#@@!!@#$%^&%$#@!#$%^&%$#@@!!@#$%^&%$#@!#$%^&%$#@@!');
+
+	      var id = JSON.stringify({ 'taewoong': 'testdata' });
+
+	      // fetch('/testdata', {
+	      //   method : 'POST',
+	      //   body : id,
+	      //   headers: {
+	      //     'Accept': 'application/json',
+	      //     'Content-Type': 'application/json'
+	      //   }
+	      // })
+	      // .then(function(response){
+	      //   console.log(1);
+	      //   if(!response.ok){
+	      //     console.log('fail');
+	      //   }
+	      //   else {
+	      //     console.log('success');
+	      //     console.log(1,response);
+	      //   }
+	      // })
+
+	      // $.ajax({
+	      //   type : 'GET',
+	      //   url : '/testdata',
+	      //   data : id,
+	      //   // dataType : 'json',
+	      //   success : function(data){
+	      //     console.log('success', data);
+	      //   },
+	      //   error : function(err){
+	      //     console.log('err',err);
+	      //   }
+	      // })
 	    }
 	  }, {
 	    key: 'render',
@@ -37694,6 +37851,11 @@
 	          onFailure: this.responseGoogle,
 	          offline: false
 	        }),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          window.localStorage.getItem('xyzGoogle')
+	        ),
 	        _react2.default.createElement(_reactFacebookLogin2.default, {
 	          appId: '1393584200670947',
 	          autoLoad: false,
