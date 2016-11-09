@@ -53,9 +53,20 @@ export function google_noToken(req, res){	//	로그인할때 유저정보 받아
 		if(err){
 			console.log(err);
 		}
+
+		connection.query('insert into xyzlogin (u_id, device, date) values ( (select u_id from xyzuser where token = "qawsed12"), "iphone", '+connection.escape(data['date'])+');'
+			// 진짜코드
+			// + connection.escape(data['token']) 
+			// + ' ) , "iphone" , '
+			// + connection.escape(data['date']) +' );'
+			, function(err){
+			if(err){
+				console.log(err);
+			}
+		})
 	})
 
-	// 콘솔창 지져분해서 우선 주석처리.
+	// Test code. 콘솔창 지져분해서 우선 주석처리.
 	// connection.query('select * from xyzUser;',function(err,result,fields){
 	// 	if(err){
 	// 		console.log(err);
