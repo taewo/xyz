@@ -22,21 +22,59 @@ var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
 var _login = require('./login.js');
 
+var _db_test = require('./db_test.js');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var router = _express2.default.Router();
-
-// test code.
 
 // import mysql from 'mysql';
 // import './login.js';
 
+var router = _express2.default.Router();
+
+// test code.
 router.get('/codestates', _login.test);
 
 router.post('/code', _login.postcall); // post 는 url 당연히 안먹지.
 
 router.get('/codes', _login.getcall);
 
+// mysql과 연결
+var connection = _mysql2.default.createConnection({
+	host: 'localhost',
+	user: 'root',
+	password: ''
+});
+
+// mysql 연결 에러 체크.
+connection.connect(function (err) {
+	if (err) {
+		console.log('mysql connect error', err);
+	}
+});
+
+connection.query('use test;', function (err) {
+	if (err) {
+		console.log(err);
+	}
+});
+
+var data = {
+	'name': 'minho',
+	'email': 'naver@naver.com',
+	'social': 'g',
+	'date': 'next monday'
+};
+
+connection.query('insert into xyzUser (name, email, social, token, date) values (' + connection.escape(data['name']) + ',' + connection.escape(data['email']) + ',' + connection.escape(data['social']) + ','
+//************ token은 너무 길어서 우선 주석처리
+// + connection.escape(data['token']) + ','
++ '111111' + ',' + connection.escape(data['date']) + ');', function (err) {
+	if (err) {
+		console.log(err);
+	}
+});
+
+console.log('!@#$%$#@$%^%$#@!');
 // real code.
 // Google 로그인.
 // fetch call 받는 곳.(token이 없는 첫 방문 유저.)
@@ -49,6 +87,10 @@ router.post('/googlenewtoken', _login.google_newToken);
 router.post('/fbnewtoken', _login.facebook_newToken);
 
 router.post('/fbnotoken', _login.facebook_noToken);
+
+router.post('/test_xyzDress', _db_test.test_xyzDress);
+
+router.post('/test_xyzCoordi', _db_test.test_xyzCoordi);
 
 // 아래 작업을 하지 않으면, URL을 직접 입력하고 들어갔을때 
 // 클라이언트 사이드 라우팅이 제대로 작동하지 않습니다.

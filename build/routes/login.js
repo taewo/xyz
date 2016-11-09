@@ -3,9 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 exports.test = test;
 exports.postcall = postcall;
 exports.getcall = getcall;
@@ -54,11 +51,10 @@ function getcall(req, res) {
 	res.send('this is get call');
 }
 
+// real code.
 function google_noToken(req, res) {
 	//	로그인할때 유저정보 받아옴.
 	console.log('hello googlenotoken');
-	console.log('this is data', req.body);
-	console.log('this is typeof data', _typeof(req.body));
 	var data = req.body;
 
 	connection.query('use test;', function (err) {
@@ -77,12 +73,12 @@ function google_noToken(req, res) {
 	});
 
 	// 콘솔창 지져분해서 우선 주석처리.
-	connection.query('select * from xyzUser;', function (err, result, fields) {
-		if (err) {
-			console.log(err);
-		}
-		console.log('result', result);
-	});
+	// connection.query('select * from xyzUser;',function(err,result,fields){
+	// 	if(err){
+	// 		console.log(err);
+	// 	}
+	// 	console.log('result',result);
+	// })
 
 	res.send('aaaa');
 	// connection.end();	// mysql connection 하는 것이 '/testdata'로 post요청 받는 밖에 있기에 connection을 end하면 더이상 db에 값을 못넣는다.
@@ -147,6 +143,5 @@ function facebook_noToken(req, res) {
 			console.log(err);
 		}
 	});
-
 	res.send('dddd');
 }

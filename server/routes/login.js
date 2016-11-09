@@ -31,10 +31,9 @@ export function getcall(req,res){
 	res.send('this is get call');
 }
 
+// real code.
 export function google_noToken(req, res){	//	로그인할때 유저정보 받아옴.
 	console.log('hello googlenotoken');
-	console.log('this is data',req.body);
-	console.log('this is typeof data', typeof req.body);
 	var data = req.body;
 
 	connection.query('use test;',function(err){
@@ -43,13 +42,13 @@ export function google_noToken(req, res){	//	로그인할때 유저정보 받아
 		}
 	});
 
-	connection.query('insert into xyzUser (name, email, social, token, date) values (' 
+	connection.query('insert into xyzUser (name, email, social, token, date) values ('
 		+ connection.escape(data['name']) + ','
 		+ connection.escape(data['email']) + ','
 		+ connection.escape(data['social']) + ','
 //************ token은 너무 길어서 우선 주석처리
 		// + connection.escape(data['token']) + ','
-		+ '111111' + ',' 
+		+ '111111' + ','
 		+ connection.escape(data['date']) + ');', function(err){
 		if(err){
 			console.log(err);
@@ -57,12 +56,12 @@ export function google_noToken(req, res){	//	로그인할때 유저정보 받아
 	})
 
 	// 콘솔창 지져분해서 우선 주석처리.
-	connection.query('select * from xyzUser;',function(err,result,fields){
-		if(err){
-			console.log(err);
-		}
-		console.log('result',result);
-	})
+	// connection.query('select * from xyzUser;',function(err,result,fields){
+	// 	if(err){
+	// 		console.log(err);
+	// 	}
+	// 	console.log('result',result);
+	// })
 
 	res.send('aaaa');
 	// connection.end();	// mysql connection 하는 것이 '/testdata'로 post요청 받는 밖에 있기에 connection을 end하면 더이상 db에 값을 못넣는다.
@@ -141,7 +140,6 @@ export function facebook_noToken(req, res){
 			}
 		}
 	)
-
 	res.send('dddd');	
 }
 

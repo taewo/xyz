@@ -1,4 +1,6 @@
 import React from 'react'
+// import { Link } from 'react-router'
+import { Segment, Button, Divider, Header, Image, Modal } from 'semantic-ui-react'
 import { browserHistory, Link } from 'react-router'
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
@@ -36,8 +38,6 @@ import 'whatwg-fetch';
 
 */
 
-import { Link } from 'react-router'
-import { Segment, Button, Divider, Header, Image, Modal } from 'semantic-ui-react'
 
 class LogIn extends React.Component {
   constructor (props) {
@@ -65,10 +65,6 @@ class LogIn extends React.Component {
     var name = googleUser.getBasicProfile().getName();
     console.log('name', name);
     var date = new Date();
-    
-
-    // var id = googleUser.getBasicProfile().getEmail();
-    // console.log('id',id);
 
     if(token){   //  토큰이 있는 기존 유저.
       console.log('i have token but...');
@@ -111,7 +107,7 @@ class LogIn extends React.Component {
               console.log(1, response);
             }
           })
-
+          // 실제코드.
           // browserHistory.push('/mydress');
         }
       })
@@ -129,7 +125,6 @@ class LogIn extends React.Component {
         else{
           console.log('success token');
 
-          // user의 정보를 fetch로 server에 보낸다.
           var obj = {};
           obj['name'] = name;
           obj['email'] = email;
@@ -158,7 +153,7 @@ class LogIn extends React.Component {
               console.log(1, response);
             }
           })
-
+          //  실제코드.
           // browserHistory.push('/mydress');
         }
       })
@@ -216,7 +211,7 @@ class LogIn extends React.Component {
               console.log(1, response);
             }
           })
-
+          // 실제코드.
           // browserHistory.push('/mydress');
         }
       })
@@ -311,39 +306,6 @@ class LogIn extends React.Component {
     // }
   }
 
-    // fetch('/testdata', {
-    //   method : 'POST',
-    //   body : id,
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   }
-    // })
-    // .then(function(response){
-    //   console.log(1);
-    //   if(!response.ok){
-    //     console.log('fail');
-    //   }
-    //   else {
-    //     console.log('success');
-    //     console.log(1,response);
-    //   }
-    // })
-
-    // $.ajax({
-    //   type : 'GET',
-    //   url : '/testdata',
-    //   data : id,
-    //   // dataType : 'json',
-    //   success : function(data){
-    //     console.log('success', data);
-    //   },
-    //   error : function(err){
-    //     console.log('err',err);
-    //   }
-    // })
-  // }
-
   render () {
    
     this.taewoong()
@@ -368,35 +330,50 @@ class LogIn extends React.Component {
           icon="fa-facebook"
           >
         </FacebookLogin>
-	{/*
-        <h1>LogIn Page</h1>
-
-        <Button circular color='facebook' icon='facebook' />
-        <Button circular color='linkedin' icon='linkedin' />
-        <Button circular color='google plus' icon='google plus' />
-
-        <Segment padded>
-          <Button primary fluid>Login</Button>
-          <Divider horizontal>Or</Divider>
-          <Button secondary fluid>Sign Up Now</Button>
-        </Segment>
-
-        <Modal trigger={<Button>Show Modal</Button>}>
-          <Modal.Header>Select a Photo</Modal.Header>
-          <Modal.Content image>
-            <Image wrapped size='medium' src='http://semantic-ui.com/images/avatar2/large/rachel.png' />
-            <Modal.Description>
-              <Header>Default Profile Image</Header>
-              <p>We've found the following gravatar image associated with your e-mail address.</p>
-              <p>Is it okay to use this photo?</p>
-            </Modal.Description>
-          </Modal.Content>
-        </Modal>
-
-        <h2><Link to='/'>Landing 이동</Link></h2>
-        <h2><Link to='/login'>LogIn</Link></h2>
-        <h2><Link to='/mydress'>MYDress</Link></h2>
-	*/}
+        {/*<form action = "/taewoong123" 
+          name = "person_info" method = "get"> 
+        </form>*/}
+        <div>
+          <form action="/test_xyzDress" method="post" >
+            <fieldset>
+              <label for="dressname">Dress name:</label>
+                <input type="text" id="dressname" name="dressName" placeholder="Enter your dress name" />
+              <label for="filename">file name:</label>
+                <input type="text" id="filename" name="fileName" placeholder="Enter your file name" />
+              <label for="filesize">file size:</label>
+                <input type="text" id="filesize" name="fileSize" placeholder="Enter your file name" />
+              <label for="fileformat">file format:</label>
+                <input type="text" id="fileformat" name="fileFormat" placeholder="Enter your file name" />
+              <select name="selectpicker">
+                <option name="outer" value="outer">outer</option>
+                <option name="jacket" value="jacket">jacket</option>
+                <option name="shirts" value="shirts">shirts</option>
+                <option name="pants" value="pants">pants</option>
+              </select>
+              <input type="hidden" name='tokenGG' value={window.localStorage.getItem('xyzGoogle')} />
+              <input type="hidden" name='tokenFB' value={window.localStorage.getItem('xyzFacebook')} />
+              <input type="submit" value="Send message" />
+              </fieldset>
+           </form>
+         </div>
+         <div>
+          <form action="/test_xyzCoordi" method="post" >
+            <fieldset>
+              <label for="dressname">Dress Coordi setname:</label>
+                <input type="text" id="dressname" name="dressCoordiSetName" value='taewoong' placeholder="Enter your dress coordi set name" />
+              <label for="filename">Coordi 1:</label>
+                <input type="text" id="filename" name="coordi1" value='pants' placeholder="Enter your Coordi1" />
+              <label for="filesize">Coordi 2:</label>
+                <input type="text" id="filesize" name="coordi2" value='shirts' placeholder="Enter your Coordi2" />
+              <label for="fileformat">Coordi 3:</label>
+                <input type="text" id="fileformat" name="coordi3" value='shoes' placeholder="Enter your Coordi3" />
+              
+              <input type="hidden" name='tokenGG' value={window.localStorage.getItem('xyzGoogle')} />
+              <input type="hidden" name='tokenFB' value={window.localStorage.getItem('xyzFacebook')} />
+              <input type="submit" value="Send message" />
+              </fieldset>
+           </form>
+         </div>
       </div>
     );
   }

@@ -13,13 +13,11 @@ class MyDress extends React.Component {
         <h2><Link to='/mydress'>MYDress</Link></h2>
         <h1>{window.localStorage.getItem('xyzGoogle')}</h1>
         <h1>{window.localStorage.getItem('xyzFacebook')}</h1>
-	{/*
-        <h2><Link to='/photoedit'>photoedit</Link></h2>
-        <form action="server.cgi" method="post" encType="multipart/form-data">
-          <input type="file" name="image" accept="image/*" id="take-picture" capture="camera"/>
-          <canvas></canvas>
-        </form>
-	*/}
+        <div>
+          {/*<form action = "http://localhost:8080/form.jsp" accept-charset="utf-8" 
+              name = "person_info" method = "get"> 
+        </form>*/}
+        </div>
       </div>
     )
   }
