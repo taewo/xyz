@@ -7,7 +7,7 @@ import FacebookLogin from 'react-facebook-login';
 import $ from 'jquery';
 import 'whatwg-fetch';
 import bodyParser from 'body-parser';
-
+import axios from 'axios'
 /*
 
 **** Header.jsx에 있는 checkUser function 설명.
@@ -45,6 +45,7 @@ class LogIn extends React.Component {
     this.state = {
       loginTextGoogle : "Login with Google",
       loginTextFacebook : 'Login with FaceBook',
+      value: 'initial value'
     };
     this.responseGoogle = this.responseGoogle.bind(this);
     this.responseFacebook = this.responseFacebook.bind(this);
@@ -53,25 +54,12 @@ class LogIn extends React.Component {
   }
 
   myFunction(){
-    fetch('/retrieveData',{
-      method: 'GET'
-    })
-    .then(function(response){
-      console.log(1);
-      // if(!response.ok){
-      //   console.log('fail');
-      // } 
-      // else {
-        console.log(22222222222);
-        console.log('response',response);
-        console.log('response.data',response.data);
-        console.log('response.body',response.body);
-        // console.log('response.body',response.body);
-        return response.json();
-      })
-    .then(function(json){
-      console.log('abcdefg');
-      console.log(json);
+    axios.post('/retrieveData')
+    .then((response) => {
+      console.log('retrieveData : ', response.data);
+      // this.setState({data: })
+      // dispatch(response.data);
+      this.setState({value: response.data[4]['owner']})
     })
   }
 
@@ -403,7 +391,7 @@ class LogIn extends React.Component {
             <button onClick={this.myFunction}>Click me</button>
           </div>
          <div>
-          {this.props.data}
+          {this.state.value}
          </div>
       </div>
     );

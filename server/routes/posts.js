@@ -4,6 +4,7 @@ import mysql from 'mysql';
 import bodyParser from 'body-parser';
 // import mysql from 'mysql';
 // import './login.js';
+import axios from 'axios'
 
 import { 
 	test, 
@@ -68,11 +69,11 @@ connection.query('insert into xyzUser (name, email, social, token, date) values 
 	}
 })
 
+
 // client에 데이터 뿌리기.
-router.get('/retrieveData', function(req,res){
+router.post('/retrieveData', function(request,response){
 	console.log('i am server');
 
-	var data = [];
 	connection.query('use test;', function(err){
 		if(err){
 			console.log(err);
@@ -83,17 +84,11 @@ router.get('/retrieveData', function(req,res){
 		if(err){
 			console.log(err);
 		}
-		// console.log('!@#$%^&*(',rows);
-		// var a = JSON.stringify(rows);
-		// console.log('aaaa',a);
-		// res.write('taewoong taweoong', rows);
-	// res.status(200).send('taewoong taweoong',rows);	
-	data = rows;
-	console.log('in',data);
+		response.send(rows);
 	})
-	console.log('out',data);
-	res./*status(200).*/write(JSON.stringify(data));
 })
+
+
 
 console.log('!@#$%$#@$%^%$#@!');
 // real code.

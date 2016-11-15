@@ -20,18 +20,22 @@ var _bodyParser = require('body-parser');
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
 var _login = require('./login.js');
 
 var _db_test = require('./db_test.js');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import mysql from 'mysql';
-// import './login.js';
-
 var router = _express2.default.Router();
 
 // test code.
+
+// import mysql from 'mysql';
+// import './login.js';
 router.get('/codestates', _login.test);
 
 router.post('/code', _login.postcall); // post 는 url 당연히 안먹지.
@@ -75,10 +79,9 @@ connection.query('insert into xyzUser (name, email, social, token, date) values 
 });
 
 // client에 데이터 뿌리기.
-router.get('/retrieveData', function (req, res) {
+router.post('/retrieveData', function (request, response) {
 	console.log('i am server');
 
-	var data = [];
 	connection.query('use test;', function (err) {
 		if (err) {
 			console.log(err);
@@ -89,16 +92,8 @@ router.get('/retrieveData', function (req, res) {
 		if (err) {
 			console.log(err);
 		}
-		// console.log('!@#$%^&*(',rows);
-		// var a = JSON.stringify(rows);
-		// console.log('aaaa',a);
-		// res.write('taewoong taweoong', rows);
-		// res.status(200).send('taewoong taweoong',rows);	
-		data = rows;
-		console.log('in', data);
+		response.send(rows);
 	});
-	console.log('out', data);
-	res. /*status(200).*/write(JSON.stringify(data));
 });
 
 console.log('!@#$%$#@$%^%$#@!');
