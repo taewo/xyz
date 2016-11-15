@@ -14,6 +14,7 @@ app.use('/', express.static(__dirname + './../client'));
 //	'/' 로 들어오는 것은 routes로 보낸다.
 app.use('/', routes);	
 
+
 const server = app.listen(port, () => {
   console.log("Express listening on port", port);
 });

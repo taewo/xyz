@@ -6,7 +6,7 @@ import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import $ from 'jquery';
 import 'whatwg-fetch';
-
+import bodyParser from 'body-parser';
 
 /*
 
@@ -49,7 +49,32 @@ class LogIn extends React.Component {
     this.responseGoogle = this.responseGoogle.bind(this);
     this.responseFacebook = this.responseFacebook.bind(this);
     this.taewoong = this.taewoong.bind(this);
+    this.myFunction = this.myFunction.bind(this);
   }
+
+  myFunction(){
+    fetch('/retrieveData',{
+      method: 'GET'
+    })
+    .then(function(response){
+      console.log(1);
+      // if(!response.ok){
+      //   console.log('fail');
+      // } 
+      // else {
+        console.log(22222222222);
+        console.log('response',response);
+        console.log('response.data',response.data);
+        console.log('response.body',response.body);
+        // console.log('response.body',response.body);
+        return response.json();
+      })
+    .then(function(json){
+      console.log('abcdefg');
+      console.log(json);
+    })
+  }
+
  
   responseGoogle (googleUser) {   //  google 로그인.
 
@@ -355,24 +380,30 @@ class LogIn extends React.Component {
               <input type="submit" value="Send message" />
               </fieldset>
            </form>
-         </div>
+          </div>
+          <div>
+            <form action="/test_xyzCoordi" method="post" >
+              <fieldset>
+                <label for="dressname">Dress Coordi setname:</label>
+                  <input type="text" id="dressname" name="dressCoordiSetName" value='taewoong' placeholder="Enter your dress coordi set name" />
+                <label for="filename">Coordi 1:</label>
+                  <input type="text" id="filename" name="coordi1" value='pants' placeholder="Enter your Coordi1" />
+                <label for="filesize">Coordi 2:</label>
+                  <input type="text" id="filesize" name="coordi2" value='shirts' placeholder="Enter your Coordi2" />
+                <label for="fileformat">Coordi 3:</label>
+                  <input type="text" id="fileformat" name="coordi3" value='shoes' placeholder="Enter your Coordi3" />
+                
+                <input type="hidden" name='tokenGG' value={window.localStorage.getItem('xyzGoogle')} />
+                <input type="hidden" name='tokenFB' value={window.localStorage.getItem('xyzFacebook')} />
+                <input type="submit" value="Send message" />
+                </fieldset>
+             </form>
+          </div>
+          <div>
+            <button onClick={this.myFunction}>Click me</button>
+          </div>
          <div>
-          <form action="/test_xyzCoordi" method="post" >
-            <fieldset>
-              <label for="dressname">Dress Coordi setname:</label>
-                <input type="text" id="dressname" name="dressCoordiSetName" value='taewoong' placeholder="Enter your dress coordi set name" />
-              <label for="filename">Coordi 1:</label>
-                <input type="text" id="filename" name="coordi1" value='pants' placeholder="Enter your Coordi1" />
-              <label for="filesize">Coordi 2:</label>
-                <input type="text" id="filesize" name="coordi2" value='shirts' placeholder="Enter your Coordi2" />
-              <label for="fileformat">Coordi 3:</label>
-                <input type="text" id="fileformat" name="coordi3" value='shoes' placeholder="Enter your Coordi3" />
-              
-              <input type="hidden" name='tokenGG' value={window.localStorage.getItem('xyzGoogle')} />
-              <input type="hidden" name='tokenFB' value={window.localStorage.getItem('xyzFacebook')} />
-              <input type="submit" value="Send message" />
-              </fieldset>
-           </form>
+          {this.props.data}
          </div>
       </div>
     );

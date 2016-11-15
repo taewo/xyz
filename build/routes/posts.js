@@ -74,6 +74,33 @@ connection.query('insert into xyzUser (name, email, social, token, date) values 
 	}
 });
 
+// client에 데이터 뿌리기.
+router.get('/retrieveData', function (req, res) {
+	console.log('i am server');
+
+	var data = [];
+	connection.query('use test;', function (err) {
+		if (err) {
+			console.log(err);
+		}
+	});
+
+	connection.query('select * from aaaa;', function (err, rows) {
+		if (err) {
+			console.log(err);
+		}
+		// console.log('!@#$%^&*(',rows);
+		// var a = JSON.stringify(rows);
+		// console.log('aaaa',a);
+		// res.write('taewoong taweoong', rows);
+		// res.status(200).send('taewoong taweoong',rows);	
+		data = rows;
+		console.log('in', data);
+	});
+	console.log('out', data);
+	res. /*status(200).*/write(JSON.stringify(data));
+});
+
 console.log('!@#$%$#@$%^%$#@!');
 // real code.
 // Google 로그인.

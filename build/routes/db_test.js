@@ -39,7 +39,7 @@ connection.connect(function (err) {
 
 function test_xyzDress(req, res) {
 	console.log('this is taewoong123123');
-
+	console.log('ahahhahahah');
 	var tokenGG = req.body.tokenGG;
 	var tokenFB = req.body.tokenFB;
 	var dressCategory = req.body.selectpicker;
